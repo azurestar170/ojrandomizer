@@ -2,11 +2,11 @@
 <Configuration>
   <Appenders>
     <Console name="STDOUT" target="SYSTEM_OUT">
-      <PatternLayout pattern="[%d %level{length=5} %c{1}.%M] %m%n" />
+      <PatternLayout pattern="[%d %level{length=5} %c{1}.%M]%n%m%n" />
     </Console>
   </Appenders>
   <Loggers>
-    <Root level="info">
+    <Root level="debug">
       <AppenderRef ref="STDOUT" />
     </Root>
   </Loggers>

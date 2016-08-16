@@ -11,7 +11,7 @@ public enum Card {
     LONG_DISTANCE_SHOT("Long-Distance Shot", false),
     NICE_JINGLE("Nice Jingle", true),
     NICE_PRESENT("Nice Present", true),
-    STIFF_CRYSTAL("Stiff Crystal", false),
+    STIFF_CRYSTAL("Stiff Crystal", true),
     PUDDING("Pudding", false),
     EXTEND("Extend", true),
     PRINCESSS_PRIVILEGE("Princess's Privilege", true),

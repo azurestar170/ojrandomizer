@@ -18,6 +18,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
+import name.az170.ojrandomizer.Card;
+import name.az170.ojrandomizer.CardsResult;
 import name.az170.ojrandomizer.CharaResult;
 import name.az170.ojrandomizer.OJRandomizer;
 
@@ -40,7 +42,7 @@ public class OJRandomizerGUI extends Application {
         initToolBar();
         initGrid();
         
-        Scene scene = new Scene(root, 1000, 450);
+        Scene scene = new Scene(root, 1000, 500);
         
         primaryStage.setScene(scene);
         primaryStage.setTitle("OJRandomizer");
@@ -63,13 +65,11 @@ public class OJRandomizerGUI extends Application {
     private void initGrid() {
         grid = new GridPane();
         
-        Image image = new Image(getClass().getResourceAsStream("qp.jpg"));
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 6; j++) {
                 hBoxes[i][j] = new HBox();
                 hBoxes[i][j].setAlignment(Pos.CENTER);
                 images[i][j] = new ImageView();
-                images[i][j].setImage(image);
                 images[i][j].fitWidthProperty().bind(root.widthProperty().divide(6));
                 images[i][j].fitHeightProperty().bind(root.heightProperty().subtract(toolBar.heightProperty()).divide(2));
                 images[i][j].setPreserveRatio(true);
@@ -100,11 +100,22 @@ public class OJRandomizerGUI extends Application {
     
     private void randomChara() {
         CharaResult result = ojRandomizer.randomizeChara();
-        logger.info(result.getChara().getCharaName());
+        Image image = new Image(getClass().getResourceAsStream("chara_" + result.getChara().name().toLowerCase() + ".bmp"));
+        images[0][0].setImage(image);
     }
     
     private void randomCards() {
-        // TODO
+        CardsResult result = ojRandomizer.randomizeCards();
+        int i = 0;
+        for (Card card : result.getCardsMap().keySet()) {
+            for (int j = 0; j < result.getCardsMap().get(card); j++) {
+                Image image = new Image(getClass().getResourceAsStream("cards_" + card.name().toLowerCase() + ".bmp"));
+                int row = i / 5 == 0 ? 0 : 1;
+                int column = i % 5 + 1;
+                images[row][column].setImage(image);
+                i++;
+            }
+        }
     }
     
     public class RandomAllEventHandler implements EventHandler<ActionEvent> {

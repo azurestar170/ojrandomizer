@@ -21,7 +21,7 @@ public enum Character {
     ROBO_BALL("Robo Ball"),
     SEAGULL("Seagull"),
     STORE_MANAGER("Store Manager"),
-    SHIFU_ROBO("Shifu Robo"),
+    SHIFU_ROBOT("Shifu Robot"),
     FLYING_CASTLE("Flying Castle"),
     SYURA("Syura"),
     NANAKO("Nanako"),
