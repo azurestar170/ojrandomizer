@@ -53,10 +53,12 @@ public class OJRandomizerGUI extends Application {
         Button randomAllBtn = new Button("All");
         Button randomCharaBtn = new Button("Chara");
         Button randomCardsBtn = new Button("Cards");
+        Button configBtn = new Button("Config");
 
         randomAllBtn.setOnAction(new RandomAllEventHandler());
         randomCharaBtn.setOnAction(new RandomCharaEventHandler());
         randomCardsBtn.setOnAction(new RandomCardsEventHandler());
+        configBtn.setOnAction(new ConfigEventHandler());
 
         toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn);
         root.setTop(toolBar);
@@ -71,7 +73,8 @@ public class OJRandomizerGUI extends Application {
                 hBoxes[i][j].setAlignment(Pos.CENTER);
                 images[i][j] = new ImageView();
                 images[i][j].fitWidthProperty().bind(root.widthProperty().divide(6));
-                images[i][j].fitHeightProperty().bind(root.heightProperty().subtract(toolBar.heightProperty()).divide(2));
+                images[i][j].fitHeightProperty().bind(
+                        root.heightProperty().subtract(toolBar.heightProperty()).divide(2));
                 images[i][j].setPreserveRatio(true);
                 hBoxes[i][j].getChildren().add(images[i][j]);
                 grid.add(hBoxes[i][j], j, i);
@@ -100,7 +103,7 @@ public class OJRandomizerGUI extends Application {
     
     private void randomChara() {
         CharaResult result = ojRandomizer.randomizeChara();
-        Image image = new Image(getClass().getResourceAsStream("chara_" + result.getChara().name().toLowerCase() + ".bmp"));
+        Image image = new Image(getClass().getResourceAsStream("chara_" + result.getChara().name().toLowerCase() + ".jpg"));
         images[0][0].setImage(image);
     }
     
@@ -109,13 +112,17 @@ public class OJRandomizerGUI extends Application {
         int i = 0;
         for (Card card : result.getCardsMap().keySet()) {
             for (int j = 0; j < result.getCardsMap().get(card); j++) {
-                Image image = new Image(getClass().getResourceAsStream("cards_" + card.name().toLowerCase() + ".bmp"));
+                Image image = new Image(getClass().getResourceAsStream("card_" + card.name().toLowerCase() + ".jpg"));
                 int row = i / 5 == 0 ? 0 : 1;
                 int column = i % 5 + 1;
                 images[row][column].setImage(image);
                 i++;
             }
         }
+    }
+    
+    private void showConfigDialog() {
+        // TODO
     }
     
     public class RandomAllEventHandler implements EventHandler<ActionEvent> {
@@ -141,6 +148,15 @@ public class OJRandomizerGUI extends Application {
         @Override
         public void handle(ActionEvent event) {
             randomCards();
+        }
+        
+    }
+    
+    public class ConfigEventHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            showConfigDialog();
         }
         
     }
