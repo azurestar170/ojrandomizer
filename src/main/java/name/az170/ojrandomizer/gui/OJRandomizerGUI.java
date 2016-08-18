@@ -4,8 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -34,6 +32,7 @@ public class OJRandomizerGUI extends Application {
     private ToolBar toolBar;
     private ImageView[][] images = new ImageView[2][6];
     private HBox[][] hBoxes = new HBox[2][6];
+    private ConfigDialog configDialog = new ConfigDialog();
     
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,7 +41,7 @@ public class OJRandomizerGUI extends Application {
         initToolBar();
         initGrid();
         
-        Scene scene = new Scene(root, 1000, 500);
+        Scene scene = new Scene(root, 500, 250);
         
         primaryStage.setScene(scene);
         primaryStage.setTitle("OJRandomizer");
@@ -55,12 +54,12 @@ public class OJRandomizerGUI extends Application {
         Button randomCardsBtn = new Button("Cards");
         Button configBtn = new Button("Config");
 
-        randomAllBtn.setOnAction(new RandomAllEventHandler());
-        randomCharaBtn.setOnAction(new RandomCharaEventHandler());
-        randomCardsBtn.setOnAction(new RandomCardsEventHandler());
-        configBtn.setOnAction(new ConfigEventHandler());
+        randomAllBtn.setOnAction(event -> randomAll());
+        randomCharaBtn.setOnAction(event -> randomChara());
+        randomCardsBtn.setOnAction(event -> randomCards());
+        configBtn.setOnAction(event -> showConfigDialog());
 
-        toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn);
+        toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn, configBtn);
         root.setTop(toolBar);
     }
     
@@ -122,43 +121,7 @@ public class OJRandomizerGUI extends Application {
     }
     
     private void showConfigDialog() {
-        // TODO
-    }
-    
-    public class RandomAllEventHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            randomAll();
-        }
-        
-    }
-    
-    public class RandomCharaEventHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            randomChara();
-        }
-        
-    }
-    
-    public class RandomCardsEventHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            randomCards();
-        }
-        
-    }
-    
-    public class ConfigEventHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            showConfigDialog();
-        }
-        
+        configDialog.showAndWait();
     }
     
     public static void main(String[] args) {

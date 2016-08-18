@@ -7,13 +7,11 @@ import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Test;
 
 public class OJRandomizerTest {
 
     private static Logger logger = LogManager.getLogger();
     
-    @Test
     public void testRandomizeChara() {
         OJRandomizer randomizer = new OJRandomizer();
         CharaConfig config = new CharaConfig();
@@ -44,21 +42,18 @@ public class OJRandomizerTest {
         logger.info("\n" + sb.toString());
     }
     
-    @Test
     public void testRandomizeChara2() {
         OJRandomizer randomizer = new OJRandomizer();
         CharaResult charaResult = randomizer.randomizeChara();
         logger.info(charaResult.getChara().getCharaName());
     }
     
-    @Test
     public void testRandomizeCards() {
         OJRandomizer randomizer = new OJRandomizer();
         CardsResult cardsResult = randomizer.randomizeCards();
         logger.info("\n" + cardsResult.toString());
     }
     
-    @Test
     public void testRandomizeCards2() {
         OJRandomizer randomizer = new OJRandomizer();
         Map<Card, Integer> cardCounts = new LinkedHashMap<>();
