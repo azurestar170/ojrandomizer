@@ -59,7 +59,8 @@ public class OJRandomizerGUI extends Application {
         randomCardsBtn.setOnAction(event -> randomCards());
         configBtn.setOnAction(event -> showConfigDialog());
 
-        toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn, configBtn);
+//        toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn, configBtn);
+        toolBar = new ToolBar(randomAllBtn, randomCharaBtn, randomCardsBtn);
         root.setTop(toolBar);
     }
     
